@@ -1,7 +1,6 @@
 package logic;
 
-import java.time.LocalDate;
-import java.util.jar.Attributes;
+import java.time.LocalDateTime;
 
 public class Task {
     private static int idCounter = 1;
@@ -9,14 +8,15 @@ public class Task {
     private int id;
     private String description;
     private String status;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public Task(String description, LocalDate createdAt) {
+    public Task(String description, LocalDateTime createdAt) {
         setId(idCounter++);
         setDescription(description);
         setStatus();
         setCreatedAt(createdAt);
+        updatedAt = null;
     }
 
     public int getId() {
@@ -46,19 +46,19 @@ public class Task {
         this.status = "todo";
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void update(String description, LocalDate updatedAt) {
+    public void update(String description, LocalDateTime updatedAt) {
         setDescription(description);
         this.updatedAt = updatedAt;
     }
@@ -77,7 +77,11 @@ public class Task {
 
     @Override
     public String toString() {
-        return "id: " + id + " - description: " + description.toLowerCase() +
+        String res = "id: " + id + " - description: " + description.toLowerCase() +
         " - status: " + status.toLowerCase() + " - created at: " + createdAt;
+        if (updatedAt != null) {
+            res = res.concat(" - updated at: " + updatedAt);
+        } 
+        return res;
     }
 }

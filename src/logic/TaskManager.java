@@ -1,7 +1,7 @@
 package logic;
 
 import java.io.File;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -17,9 +17,22 @@ public class TaskManager {
         return tasks;
     }
 
-    public void addTask(String description) {
-        tasks.add(new Task(description, LocalDate.now()));
+    private Task searchTask(int id) {
+        Task res = null;
+        for (Task t: tasks) {
+            if (t.getId() == id) {
+                res = t;
+                break;
+            }
+        }
+        return res;
     }
 
-    
+    public void addTask(String description) {
+        tasks.add(new Task(description, LocalDateTime.now()));
+    }
+
+    public void updateTask(int taskId, String newDesc) {
+        searchTask(taskId).update(newDesc, LocalDateTime.now());
+    }
 }
