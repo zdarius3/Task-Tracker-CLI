@@ -63,14 +63,11 @@ public class Task {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public void changeStatus(String newStatus) {
-        if (newStatus.equals("todo")) {
-            this.status = "todo";
-        }
-        else if (newStatus.equals("in-progress")) {
+    public void changeStatus(String command) {
+        if (command.equals("mark-in-progress")) {
             this.status = "in-progress";
         }
-        else if (newStatus.equals("done")) {
+        else if (command.equals("mark-done")) {
             this.status = "done";
         }
         this.updatedAt = LocalDateTime.now();
