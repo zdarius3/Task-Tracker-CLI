@@ -11,11 +11,11 @@ public class Task {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Task(String description, LocalDateTime createdAt) {
+    public Task(String description) {
         setId(idCounter++);
         setDescription(description);
         setStatus();
-        setCreatedAt(createdAt);
+        setCreatedAt();
         updatedAt = null;
     }
 
@@ -50,17 +50,17 @@ public class Task {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt() {
+        this.createdAt = LocalDateTime.now();
     }
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void update(String description, LocalDateTime updatedAt) {
+    public void update(String description) {
         setDescription(description);
-        this.updatedAt = updatedAt;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void changeStatus(String newStatus) {
@@ -73,6 +73,7 @@ public class Task {
         else if (newStatus.equals("done")) {
             this.status = "done";
         }
+        this.updatedAt = LocalDateTime.now();
     }
 
     @Override

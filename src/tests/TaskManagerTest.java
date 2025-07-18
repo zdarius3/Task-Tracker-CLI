@@ -9,18 +9,22 @@ public class TaskManagerTest {
         tm.addTask("testing task 1");
         tm.addTask("testing task 2");
         tm.addTask("testing task 3");
+        showTasks(tm);
 
-        for (Task t : tm.getTasks()) {
-            System.out.println(t);
-        }
-
-        // editing two of the test tasks
+        /* editing two of the test tasks
         tm.updateTask(1, "updating task 1");
         tm.updateTask(3, "updating task 2");
+        showTasks(tm);*/
 
+        // changing some tasks' statuses
+        tm.updateTaskStatus(1, "in-progress");
+        tm.updateTaskStatus(2, "done");
+        showTasks(tm);
+    }
+
+    private static void showTasks(TaskManager tm) {
         for (Task t : tm.getTasks()) {
             System.out.println(t);
         }
-
     }
 }
