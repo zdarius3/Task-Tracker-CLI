@@ -78,10 +78,10 @@ public class Task {
 
     @Override
     public String toString() {
-        String res = "id: " + id + " - description: " + description.toLowerCase() +
-        " - status: " + status.toLowerCase() + " - created at: " + createdAt;
+        String res = "id: " + id + "\ndescription: " + description.toLowerCase() +
+        "\nstatus: " + status.toLowerCase() + "\ncreated at: " + createdAt;
         if (updatedAt != null) {
-            res = res.concat(" - updated at: " + updatedAt);
+            res = res.concat("\nupdated at: " + updatedAt);
         } 
         return res;
     }

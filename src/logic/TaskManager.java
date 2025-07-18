@@ -12,7 +12,7 @@ public class TaskManager {
         json = new File("data/data.json");
     }
 
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getAllTasks() {
         return tasks;
     }
 
@@ -42,5 +42,19 @@ public class TaskManager {
 
     public void updateTaskStatus(int taskId, String newStatus) {
         searchTask(taskId).changeStatus(newStatus);
+    }
+
+    public void deleteTask(int taskId) {
+        tasks.remove(searchTask(taskId));
+    }
+
+    public ArrayList<Task> getTasksByStatus(String status) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t: tasks) {
+            if (t.getStatus().equals(status)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
     }
 }
