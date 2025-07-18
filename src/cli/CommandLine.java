@@ -41,7 +41,7 @@ public class CommandLine {
     }
 
     private static boolean validateInput(String input) {
-        boolean res = false;
+        boolean exit = false;
         // this splits the input in 3 parts:
         // command - task id (if exists) - description (if exists)
         Pattern pattern = Pattern.compile("^(\\w+(?:-\\w+)*)(?:\\s+(\\w+(?:-\\w+)*))?(?:\\s+\"(.+?)\")?$");
@@ -86,13 +86,23 @@ public class CommandLine {
                 }
             }
             
+            else if (command.equals("clear")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+            
+            else if (command.equals("exit")) {
+                exit = true;
+                System.out.println("See you later! :)");
+            }
+            
             else {
                 System.out.println("Invalid command...");
             }
         } else {
             System.out.println("Invalid format...");
         }
-        return res;
+        return exit;
     }
 
     public static void printTaskList(ArrayList<Task> tasks) {
