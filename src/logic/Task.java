@@ -4,24 +4,26 @@ import java.time.LocalDate;
 import java.util.jar.Attributes;
 
 public class Task {
-    private String id;
+    private static int idCounter = 1;
+
+    private int id;
     private String description;
     private String status;
     private LocalDate createdAt;
     private LocalDate updatedAt;
 
-    public Task(String id, String description, String status, LocalDate createdAt) {
-        setId(id);
+    public Task(String description, LocalDate createdAt) {
+        setId(idCounter++);
         setDescription(description);
         setStatus();
         setCreatedAt(createdAt);
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -69,7 +71,7 @@ public class Task {
             this.status = "in-progress";
         }
         else if (newStatus.equals("done")) {
-            this.status = done;
+            this.status = "done";
         }
     }
 
