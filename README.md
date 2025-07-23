@@ -1,18 +1,63 @@
-## Getting Started
+# Command Line Interface (CLI) Task Manager app
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+A simple app that lets you keep track of on-going tasks. You can create, update, delete, or change the status of your tasks. Made as the first **roadmap.sh**'s backend project.
 
-## Folder Structure
+## Features
+1 - **Add a task:** creates a new task with a description.
+2 - **Update a task:** changes the description of an existing task.
+3 -  **Delete a task:** deletes an existing task.
+4 - **Change a task's status:** updates the status of an existing task.
+5 - **List tasks:** lets you see a list of all the task, or filter them by their status.
 
-The workspace contains two folders by default, where:
+## Installation
+1 - **Clone the repository:**
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+   ```bash
+   git clone https://github.com/zdarius3/Task-Tracker-CLI
+   cd task_tracker_cli
+   ```
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+2 - **Compile the source code:**
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+    ```bash
+    javac -d bin src/cli/CommandLine.java src/logic/*.java
+    ```
 
-## Dependency Management
+3 - **Execute the program:**
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+    ```bash
+    java -cp bin cli.CommandLine
+    ```
+
+## Usage
+    ```bash
+    #Adding a task
+    add "new task"
+    #Output: Task added succesfully.
+
+    #Updating an existing task, assume there exists a task with ID 3
+    update 3 "updating task description"
+    #Output: Task updated succesfully
+
+    #Deleting a task, assume there exist a task with ID 3
+    delete 3
+    #Output: Task deleted succesfully.
+
+    #Marking a task as in-progress
+    mark-in-progress 3
+    #Output: Task status updated succesfully.
+
+    #Marking a task as done
+    mark-done 3
+    #Output: Task status updated succesfully.
+
+    #Listing all tasks
+    list
+    #Output: all registered tasks and their properties
+
+    #Listing tasks by status
+    list todo
+    list in-progress
+    list done
+    #Output: all registered tasks with the specified status, and their properties
+    ```
