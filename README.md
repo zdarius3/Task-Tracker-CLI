@@ -3,11 +3,11 @@
 A simple app that lets you keep track of on-going tasks. You can create, update, delete, or change the status of your tasks. Made as the first **roadmap.sh**'s backend project.
 
 ## Features
-- 1. **Add a task:** creates a new task with a description.
-- 2. **Update a task:** changes the description of an existing task.
-- 3.  **Delete a task:** deletes an existing task.
-- 4. **Change a task's status:** updates the status of an existing task.
-- 5. **List tasks:** lets you see a list of all the task, or filter them by their status.
+1. **Add a task:** creates a new task with a description.
+2. **Update a task:** changes the description of an existing task.
+3.  **Delete a task:** deletes an existing task.
+4. **Change a task's status:** updates the status of an existing task.
+5. **List tasks:** lets you see a list of all the task, or filter them by their status.
 
 ## Installation
 1. **Clone the repository:**
@@ -29,35 +29,35 @@ A simple app that lets you keep track of on-going tasks. You can create, update,
     ```
 
 ## Usage
-    ```bash
-    #Adding a task
-    add "new task"
-    #Output: Task added succesfully.
+```bash
+#Adding a task
+add "new task"
+#Output: Task added succesfully.
 
-    #Updating an existing task, assume there exists a task with ID 3
-    update 3 "updating task description"
-    #Output: Task updated succesfully
+#Updating an existing task, assume there exists a task with ID 3
+update 3 "updating task description"
+#Output: Task updated successfully
 
-    #Deleting a task, assume there exist a task with ID 3
-    delete 3
-    #Output: Task deleted succesfully.
+#Deleting a task, assume there exist a task with ID 3
+delete 3
+#Output: Task deleted successfully.
 
-    #Marking a task as in-progress
-    mark-in-progress 3
-    #Output: Task status updated succesfully.
+#Marking a task as in-progress
+mark-in-progress 3
+#Output: Task status updated successfully.
 
-    #Marking a task as done
-    mark-done 3
-    #Output: Task status updated succesfully.
+#Marking a task as done
+mark-done 3
+#Output: Task status updated successfully.
 
-    #Listing all tasks
-    list
-    #Output: all registered tasks and their properties
+#Listing all tasks
+list
+#Output: all registered tasks and their properties
 
-    #Listing tasks by status
-    list todo
-    list in-progress
-    list done
-    #Output: all registered tasks with the specified status, and their properties
-    ```
-    
+#Listing tasks by status
+list todo
+list in-progress
+list done
+#Output: all registered tasks with the specified status, and their properties
+
+```

@@ -70,10 +70,10 @@ public class Task {
     }
 
     public void changeStatus(String command) {
-        if (command.equals("mark-in-progress")) {
+        if (command.equals("mark-in-progress") || command.equals("in-progress")) {
             this.status = "in-progress";
         }
-        else if (command.equals("mark-done")) {
+        else if (command.equals("mark-done") || command.equals("done")) {
             this.status = "done";
         }
         this.updatedAt = LocalDateTime.now();
