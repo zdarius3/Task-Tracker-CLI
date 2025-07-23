@@ -49,23 +49,29 @@ public class CommandLine {
                         break;
                     case "add":
                         taskManager.addTask(description);
+                        System.out.println("Task added succesfully.");
                         break;
                     case "update":
                         taskManager.updateTask(id, description);
+                        System.out.println("Task updated succesfully.");
                         break;
                     case "mark-in-progress":
                     case "mark-done":
                         taskManager.updateTaskStatus(id, command);
+                        System.out.println("Task status updated succesfully.");
                         break;
                     case "delete":
                         taskManager.deleteTask(id);
+                        System.out.println("Task deleted succesfully.");
                         break;
                     case "list":
                         if (idStr != null && (idStr.equals("in-progress") ||
                                 idStr.equals("done") || idStr.equals("todo"))) {
+                            System.out.println("Showing tasks with the status (" + idStr + "):");
                             printTaskList(taskManager.getTasksByStatus(idStr));
                         }
                         else {
+                            System.out.println("Showing all the tasks:");
                             printTaskList(taskManager.getAllTasks());
                         }   break;
                     case "clear":
@@ -79,11 +85,11 @@ public class CommandLine {
                         System.out.println("Invalid command...");
                         break;
                 }
+                taskManager.saveTasks();
             } else {
                 System.out.println("Invalid format...");
             }
         } while (!input.equals("exit"));
-
     }
 
     public static void showCommands() {

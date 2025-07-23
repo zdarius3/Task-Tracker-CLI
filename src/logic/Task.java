@@ -1,22 +1,25 @@
 package logic;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Task {
-    private static int idCounter = 1;
-
     private int id;
     private String description;
     private String status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    public static int idCounter = 0;
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
     public Task(String description) {
-        setId(idCounter++);
+        setId(++idCounter);
         setDescription(description);
         setStatus();
-        setCreatedAt();
-        updatedAt = null;
+        setCreatedAt(LocalDateTime.now());
+        setUpdatedAt(LocalDateTime.now());
     }
 
     public int getId() {
@@ -35,7 +38,7 @@ public class Task {
         if (description.replaceAll(" ", "").equals("")) {
             throw new IllegalArgumentException("Description can't be empty...");
         }
-        this.description = description;
+        this.description = description.replaceAll("\"", "");
     }
 
     public String getStatus() {
@@ -50,12 +53,16 @@ public class Task {
         return createdAt;
     }
 
-    public void setCreatedAt() {
-        this.createdAt = LocalDateTime.now();
+    public void setCreatedAt(LocalDateTime dateTime) {
+        this.createdAt = dateTime;
     }
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime dateTime) {
+        this.updatedAt = dateTime;
     }
 
     public void update(String description) {
