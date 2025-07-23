@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class TaskManager {
         tasks = loadTasks();
     }
 
+    @SuppressWarnings("CallToPrintStackTrace")
     private ArrayList<Task> loadTasks() {
         ArrayList<Task> loadedTasks = new ArrayList<>();
 
@@ -33,12 +35,13 @@ public class TaskManager {
                     loadedTasks.add(JsonManager.createTaskFromJson(taskJson));
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return loadedTasks;
     }
 
+    @SuppressWarnings("CallToPrintStackTrace")
     public void saveTasks() {
         StringBuilder sb = new StringBuilder();
         sb.append("[\n");
@@ -55,7 +58,7 @@ public class TaskManager {
         String jsonContent = sb.toString();
         try {
             Files.writeString(DATA_PATH, jsonContent);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
