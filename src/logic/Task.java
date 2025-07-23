@@ -1,22 +1,24 @@
 package logic;
 
-import java.time.LocalDate;
-import java.util.jar.Attributes;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Task {
-    private static int idCounter = 1;
-
     private int id;
     private String description;
     private String status;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public Task(String description, LocalDate createdAt) {
-        setId(idCounter++);
+    public static int idCounter = 0;
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+    public Task(String description) {
+        setId(++idCounter);
         setDescription(description);
         setStatus();
-        setCreatedAt(createdAt);
+        setCreatedAt(LocalDateTime.now());
+        setUpdatedAt(LocalDateTime.now());
     }
 
     public int getId() {
@@ -35,7 +37,7 @@ public class Task {
         if (description.replaceAll(" ", "").equals("")) {
             throw new IllegalArgumentException("Description can't be empty...");
         }
-        this.description = description;
+        this.description = description.replaceAll("\"", "");
     }
 
     public String getStatus() {
@@ -46,38 +48,44 @@ public class Task {
         this.status = "todo";
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDateTime dateTime) {
+        this.createdAt = dateTime;
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void update(String description, LocalDate updatedAt) {
-        setDescription(description);
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt(LocalDateTime dateTime) {
+        this.updatedAt = dateTime;
     }
 
-    public void changeStatus(String newStatus) {
-        if (newStatus.equals("todo")) {
-            this.status = "todo";
-        }
-        else if (newStatus.equals("in-progress")) {
+    public void update(String description) {
+        setDescription(description);
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void changeStatus(String command) {
+        if (command.equals("mark-in-progress")) {
             this.status = "in-progress";
         }
-        else if (newStatus.equals("done")) {
+        else if (command.equals("mark-done")) {
             this.status = "done";
         }
+        this.updatedAt = LocalDateTime.now();
     }
 
     @Override
     public String toString() {
-        return "id: " + id + " - description: " + description.toLowerCase() +
-        " - status: " + status.toLowerCase() + " - created at: " + createdAt;
+        String res = "id: " + id + "\ndescription: " + description.toLowerCase() +
+        "\nstatus: " + status.toLowerCase() + "\ncreated at: " + createdAt;
+        if (updatedAt != null) {
+            res = res.concat("\nupdated at: " + updatedAt);
+        } 
+        return res;
     }
 }
