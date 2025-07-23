@@ -88,22 +88,22 @@ public class CommandLine {
 
     private static void add(String description) {
         taskManager.addTask(description);
-        System.out.println("Task added succesfully.");
+        System.out.println("Task added successfully.");
     }
 
     private static void update(int taskId, String description) {
         taskManager.updateTask(taskId, description);
-        System.out.println("Task updated succesfully.");
+        System.out.println("Task updated successfully.");
     }
 
     private static void updateStatus(int taskId, String newStatus) {
         taskManager.updateTaskStatus(taskId, newStatus);
-        System.out.println("Task status updated succesfully.");
+        System.out.println("Task status updated successfully.");
     }
 
     private static void delete(int taskId) {
         taskManager.deleteTask(taskId);
-        System.out.println("Task deleted succesfully.");
+        System.out.println("Task deleted successfully.");
     }
 
     private static void showList(String filter) {

@@ -32,7 +32,7 @@ A simple app that lets you keep track of on-going tasks. You can create, update,
 ```bash
 #Adding a task
 add "new task"
-#Output: Task added succesfully.
+#Output: Task added successfully.
 
 #Updating an existing task, assume there exists a task with ID 3
 update 3 "updating task description"
