@@ -21,16 +21,19 @@ public class CommandLine {
     }
 
     private static void askInput() {
-        String input;
+        String input = "";
+        Scanner scanner = new Scanner(System.in);
         do {
             System.out.print("\u001B[32m" + "task-cli > " + "\u001B[0m");
-            Scanner scanner = new Scanner(System.in);
             input = scanner.nextLine();
 
             // this splits the input in 3 parts:
             // command - task id (if exists) - description (if exists)
-            Pattern pattern = Pattern.compile("^(\\w+(?:-\\w+)*)(?:\\s+" +
-                    "(\\w+(?:-\\w+)*))?(?:\\s+\"(.+?)\")?$");
+            Pattern pattern = Pattern.compile("^(\\w+(?:-\\w+)*)" + //first word (add, mark-done, update, etc)
+            "(?:\\s+(\\w+(?:-\\w+)*))?" + //second word or id (update 1, list todo, etc)
+            "(?:\\s+\"(.+?)\")?" + //description between quotation marks
+            "$"); //forces the coincidence to be on the entire line
+
             Matcher matcher = pattern.matcher(input);
 
             int id = -1;
@@ -44,27 +47,24 @@ public class CommandLine {
                 }
 
                 switch (command) {
-                    case "help":
-                        showCommands();
-                        break;
-                    case "add":
+                    case "help" -> showCommands();
+                    case "add" -> {
                         taskManager.addTask(description);
                         System.out.println("Task added succesfully.");
-                        break;
-                    case "update":
+                    }
+                    case "update" -> {
                         taskManager.updateTask(id, description);
                         System.out.println("Task updated succesfully.");
-                        break;
-                    case "mark-in-progress":
-                    case "mark-done":
+                    }
+                    case "mark-in-progress", "mark-done" -> {
                         taskManager.updateTaskStatus(id, command);
                         System.out.println("Task status updated succesfully.");
-                        break;
-                    case "delete":
+                    }
+                    case "delete" -> {
                         taskManager.deleteTask(id);
                         System.out.println("Task deleted succesfully.");
-                        break;
-                    case "list":
+                    }
+                    case "list" -> {
                         if (idStr != null && (idStr.equals("in-progress") ||
                                 idStr.equals("done") || idStr.equals("todo"))) {
                             System.out.println("Showing tasks with the status (" + idStr + "):");
@@ -73,17 +73,14 @@ public class CommandLine {
                         else {
                             System.out.println("Showing all the tasks:");
                             printTaskList(taskManager.getAllTasks());
-                        }   break;
-                    case "clear":
+                        }
+                    }
+                    case "clear" -> {
                         System.out.print("\033[H\033[2J");
                         System.out.flush(); //clean the terminal
-                        break;
-                    case "exit":
-                        System.out.println("See you later!");
-                        break;
-                    default:
-                        System.out.println("Invalid command...");
-                        break;
+                    }
+                    case "exit" -> System.out.println("See you later!");
+                    default -> System.out.println("Invalid command...");
                 }
                 taskManager.saveTasks();
             } else {
@@ -93,17 +90,19 @@ public class CommandLine {
     }
 
     public static void showCommands() {
-        System.out.println("---------------\n" +
-                "commands: \n" +
-                "---------------\n" +
-                "add \"(task description)\" -> add a new task.\n" +
-                "update (task id) \"(new description)\" -> updates an existing task.\n" +
-                "mark-in-progress (task id) -> marks a specific task as in-progress.\n" +
-                "mark-done (task id) -> marks a specific task as done.\n" +
-                "delete (task id) -> deletes a specific task.\n" +
-                "clear -> cleans the terminal.\n" +
-                "exit -> close the program.\n" +
-                "---------------\n");
+        System.out.println("""
+                           ---------------
+                           commands: 
+                           ---------------
+                           add "(task description)" -> add a new task.
+                           update (task id) "(new description)" -> updates an existing task.
+                           mark-in-progress (task id) -> marks a specific task as in-progress.
+                           mark-done (task id) -> marks a specific task as done.
+                           delete (task id) -> deletes a specific task.
+                           clear -> cleans the terminal.
+                           exit -> close the program.
+                           ---------------
+                           """);
     }
 
     public static void printTaskList(ArrayList<Task> tasks) {

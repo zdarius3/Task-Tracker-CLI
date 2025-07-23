@@ -1,13 +1,11 @@
 package logic;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TaskManager {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
     private final Path DATA_PATH = Path.of("data/data.json");
 
     public TaskManager() {
@@ -45,10 +43,11 @@ public class TaskManager {
         StringBuilder sb = new StringBuilder();
         sb.append("[\n");
 
+        //save each task separately
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(JsonManager.exportTaskToJson(tasks.get(i)));
             if (i < tasks.size() - 1) {
-                sb.append(",\n");
+                sb.append(",\n"); //only put a comma if its the last one
             }
         }
         sb.append("\n]");
