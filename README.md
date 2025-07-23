@@ -42,22 +42,22 @@ update 3 "updating task description"
 delete 3
 #Output: Task deleted successfully.
 
-#Marking a task as in-progress
-mark-in-progress 3
+#Marking a task as in-progress, assume there exist a task with ID 3
+mark-in-progress 3 
 #Output: Task status updated successfully.
 
-#Marking a task as done
+#Marking a task as done, assume there exist a task with ID 3
 mark-done 3
 #Output: Task status updated successfully.
 
 #Listing all tasks
 list
-#Output: all registered tasks and their properties
+#Output: all registered tasks and their properties.
 
 #Listing tasks by status
 list todo
 list in-progress
 list done
-#Output: all registered tasks with the specified status, and their properties
+#Output: all registered tasks with the specified status, and their properties.
 
 ```
