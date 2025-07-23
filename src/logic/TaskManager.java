@@ -61,6 +61,9 @@ public class TaskManager {
     }
 
     public ArrayList<Task> getAllTasks() {
+        if (tasks.isEmpty()) {
+            throw new IllegalStateException("There are no registered tasks...");
+        }
         return tasks;
     }
 
@@ -86,15 +89,27 @@ public class TaskManager {
     }
 
     public void updateTask(int taskId, String newDesc) {
-        searchTask(taskId).update(newDesc);
+        Task foundTask = searchTask(taskId);
+        if(foundTask == null) {
+            throw new IllegalArgumentException("You can't update a non-existent task...");
+        }
+        foundTask.update(newDesc);
     }
 
     public void updateTaskStatus(int taskId, String newStatus) {
-        searchTask(taskId).changeStatus(newStatus);
+        Task foundTask = searchTask(taskId);
+        if(foundTask == null) {
+            throw new IllegalArgumentException("You can't change a non-existent task's status...");
+        }
+        foundTask.changeStatus(newStatus);
     }
 
     public void deleteTask(int taskId) {
-        tasks.remove(searchTask(taskId));
+        Task foundTask = searchTask(taskId);
+        if (foundTask == null) {
+            throw new IllegalArgumentException("You can't delete a non-existent task...");
+        }
+        tasks.remove(foundTask);
     }
 
     public ArrayList<Task> getTasksByStatus(String status) {
@@ -103,6 +118,9 @@ public class TaskManager {
             if (t.getStatus().equals(status)) {
                 foundTasks.add(t);
             }
+        }
+        if (foundTasks.isEmpty()) {
+            throw new IllegalStateException ("There isn't any existing task with the status \"" + status + "\"...");
         }
         return foundTasks;
     }
